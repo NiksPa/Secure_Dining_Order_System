@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DiningOrderingSystem.Models.NoticeViewModel
+
+<h1 class="mt-5">Add Notice</h1>
+<form method="post" action="AddNotice" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">NoticeTitle</label>
+        <input type="text" class="form-control" asp-for="NoticeTitle">
+        <span asp-validation-for="NoticeTitle" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">NoticeContents</label>
+        <input type="textarea" class="form-control" asp-for="NoticeContent">
+        <span asp-validation-for="NoticeContent" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-dark">Add Notice</button>
+</form>
+
+@if (TempData["Status"] != null)
+{
+    <br />
+    @if (TempData["Status"].ToString() == "200")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    }
+}

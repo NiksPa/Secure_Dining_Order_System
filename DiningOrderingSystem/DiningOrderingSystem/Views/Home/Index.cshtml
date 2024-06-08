@@ -1,0 +1,51 @@
+﻿@model List<DiningOrderingSystem.Models.Data.NoticeItem>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Dining Ordering System !</h1>
+</div>
+
+@if (TempData["Status"] != null)
+{
+    @if (TempData["Status"].ToString() == "200")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    }
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <a class="btn btn-dark mt-5" asp-controller="Home" asp-action="AddNotice">Add Notice</a>
+}
+
+@foreach(var notice in Model){
+    <div class="row mt-5">
+        <div class="col-sm-12">
+            <div calss="card bg-light border-dark" style="border:solid;border-color:#0A0708;box-shadow:5px 5px #444444">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @notice.NoticeTitle
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@notice.NoticeDate.ToShortDateString()</h6>
+                    <p class="card-text">@notice.NoticeContent</p>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-danger" href="Home/DeleteNotice?NoticeTitle=@notice.NoticeTitle">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
