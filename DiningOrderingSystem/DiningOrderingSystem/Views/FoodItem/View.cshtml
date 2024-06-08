@@ -1,0 +1,44 @@
+﻿@model DiningOrderingSystem.Models.UpdateFoodItemViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1 class="mt-5">Edit Food Item</h1>
+<form method="post" action="UpdateFoodItem" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Calorie</label>
+        <input type="number" class="form-control" asp-for="Calorie">
+        <span asp-validation-for="Calorie" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Contents</label>
+        <input type="text" class="form-control" asp-for="Contents">
+        <span asp-validation-for="Contents" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-dark">Submit</button>
+    <button type="submit" class="btn btn-danger" asp-action="DeleteFoodItem">Delete</button>
+</form>
+
+@if (TempData["Status"] != null)
+{
+    <br />
+    @if (TempData["Status"].ToString() == "200")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    }
+}
